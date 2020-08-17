@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login</title>
+    <link rel="shortcut icon" href="{{url_for('static', filename='favicon.svg')}}" type="image/svg">
+    <link rel="stylesheet" href="{{url_for('static', filename='bootstrap.min.css')}}">
+</head>
+<body>
+    <div class="jumbotron container mt-2" style="height: 97vh;">
+        <div class="row">
+            <div class="col sm-12 text-center mb-1">
+                <h1 class="text-success title "><u>Login</u></h1>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-sm-4 offset-sm-4">
+                <form method="POST" action="{{url_for('showLogin')}}">
+                    <div class="form-group">
+                      <label for="username">Username</label>
+                      <input type="text" class="form-control" id="username" name="username">
+                    </div>
+                    <div class="form-group">
+                      <label for="password">Password</label>
+                      <input type="password" class="form-control" id="password" name="password">
+                      <br>
+                      <small class="text-secondary">Username and Password have been generate and saved in the database!</small>
+                    </div>
+                    <button type="submit" class="btn btn-primary">Login</button>
+                  </form>
+            </div>
+    
+    </div>
+    </div>
+    
+    <script src="{{url_for('static', filename='jquery-3.5.1.slim.min.js' )}}"></script>
+    <script src="{{url_for('static', filename='popper.min.js' )}}"></script>
+    <script src="{{url_for('static', filename='bootstrap.min.js' )}}"></script>
+</body>
+</html>

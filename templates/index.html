@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Item List</title>
+    <link rel="shortcut icon" href="{{url_for('static', filename='favicon.svg')}}" type="image/svg">
+    <link rel="stylesheet" href="{{url_for('static', filename='bootstrap.min.css')}}">
+</head>
+<body>
+    <div class="jumbotron container mt-2" style="height: 97vh;">
+        <div class="row">
+            <div class="col sm-12 text-center mb-1">
+                <h1 class="text-success title "><u>Daftar Menu Caffe Sore</u></h1>
+            </div>
+        </div>
+        <div class="row">
+    {%for barang in item:%}
+        <div class="col-sm-4">
+            <div class="card mx-5 my-2" style="width: 18rem;">
+                <div class="card-body bg-success">
+                    <h5 class="card-title text-white">{{barang[1]}}</h5>
+                    <p class="card-text">
+                    <span class="badge badge-pill badge-warning">Rp {{barang[2]}}</span> </p>
+                </div>
+            </div>
+        </div>
+    {%endfor%}
+    </div>
+    </div>
+    
+    <div class="fixed-bottom col-sm-3 offset-9" style="margin-bottom: 5vh;">
+        <a class="btn btn-primary" role="button" href="{{url_for('reset')}}">Go To Cashier</a>
+        <a class="btn btn-danger" role="button" href="{{url_for('showLogin')}}">Log Out</a>
+    </div>
+    <script src="{{url_for('static', filename='jquery-3.5.1.slim.min.js' )}}"></script>
+    <script src="{{url_for('static', filename='popper.min.js' )}}"></script>
+    <script src="{{url_for('static', filename='bootstrap.min.js' )}}"></script>
+</body>
+</html>

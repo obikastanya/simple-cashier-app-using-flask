@@ -1,0 +1,21 @@
+Yang harus diterapkan.
+if, for, data, login, logout, session/cookie, database. 
+
+halaman:
+login.
+Kasir.
+Barang.
+
+Data:
+login (username, password).
+Kasir (Barang, jumlah, harga, sub-total, total).
+Barang (Barang, harga).
+
+
+Flow Aplikasi:
+Login ->validate()->putToSession()->Daftar_Barang.
+
+Daftar_Barang->getDataFromDB()->showData()->InterfaceDataBarang
+
+Kasir->inputBelaja(Nama, harga, jumlah)->showTagihanBelanja()->hitungBelanja()->total.
+
