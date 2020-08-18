@@ -1,5 +1,5 @@
 import connection
-from flask import (Flask, render_template, url_for, request, redirect, session)
+from flask import (Flask, render_template, url_for, request, redirect, session, flash)
 from werkzeug import secure_filename
 
 # create flask instance
@@ -55,24 +55,19 @@ def getTotal():
         total += listItem[index]["subTotal"]
     return total
 
-def checkIsSession():
-    if "username" in session:
-        return redirect(url_for("index"))
-
-def checkNoSession():
-    if not "username" in session:
-        return redirect(url_for("showLogin"))
 
 @ app.route('/')
 def index():
-    checkNoSession()
+    if not "username" in session:
+        return redirect(url_for("showLogin"))
     item = getItem()
     return render_template('index.html', item=item)
 
 
 @ app.route('/cashier', methods=['GET', 'POST'])
 def showCashier():
-    checkNoSession()
+    if not "username" in session:
+        return redirect(url_for("showLogin"))
     if(request.method == 'POST'):
         listingSelectedItem(request.form)
         item = getItem()
@@ -104,18 +99,24 @@ def saving():
 
 @ app.route('/login', methods=["GET", "POST"])
 def showLogin():
-    checkIsSession()
+    if "username" in session:
+        return redirect(url_for("index"))
+
     if request.method=="POST":
         username=request.form["username"]
         password=request.form["password"]
         auth=getAuthentification(username)
         if auth:
-            print("not empty")
             if auth[1]==str(password):
-                session["username"]=auth[0]
+                session["username"]=username
                 return redirect(url_for("index"))
             else:
-                print("Password Is Wrong")
+                flash("Password Anda Salah")
         else:
-            print("Username is Wrong")
+            flash("Username Anda Salah")
     return render_template('login.html')
+
+@app.route('/logOut')
+def logOut():
+    session.pop("username", None)
+    return redirect(url_for('showLogin'))

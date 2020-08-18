@@ -9,6 +9,22 @@
 </head>
 <body>
     <div class="jumbotron container mt-2" style="height: 97vh;">
+{% with messages = get_flashed_messages()%}
+        {% if messages %}
+        {% for message in messages: %}
+        <div class="row">
+            <div class="col-sm-8 offset-2">
+                <div class="alert alert-danger text-center alert-dismissible fade show" role="alert">
+                    {{message}}
+                    <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                      <span aria-hidden="true">&times;</span>
+                    </button>
+                  </div>
+            </div>
+        </div>
+        {%endfor%}
+    {%endif%}
+{%endwith%}
         <div class="row">
             <div class="col sm-12 text-center mb-1">
                 <h1 class="text-success title "><u>Login</u></h1>
@@ -19,11 +35,11 @@
                 <form method="POST" action="{{url_for('showLogin')}}">
                     <div class="form-group">
                       <label for="username">Username</label>
-                      <input type="text" class="form-control" id="username" name="username">
+                      <input type="text" class="form-control" id="username" name="username" required>
                     </div>
                     <div class="form-group">
                       <label for="password">Password</label>
-                      <input type="password" class="form-control" id="password" name="password">
+                      <input type="password" class="form-control" id="password" name="password" required>
                       <br>
                       <small class="text-secondary">Username and Password have been generate and saved in the database!</small>
                     </div>
